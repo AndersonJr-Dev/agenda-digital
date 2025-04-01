@@ -1,0 +1,47 @@
+<%- include('../includes/head.ejs') %> <%- include('../includes/navigation.ejs')
+%>
+
+<main>
+  <div class="centered">
+    <h1>Meus Contatos</h1>
+    <% if (contacts.length > 0) { %>
+    <div class="grid">
+      <% for (let contact of contacts) { %>
+      <article class="card product-item">
+        <header class="card__header">
+          <h1 class="product__title"><%= contact.name %></h1>
+        </header>
+        <div class="card__content">
+          <p class="product__phone">
+            <strong>Telefone:</strong> <%= contact.phone %>
+          </p>
+          <% if (contact.email) { %>
+          <p class="product__email">
+            <strong>Email:</strong> <%= contact.email %>
+          </p>
+          <% } %> <% if (contact.address) { %>
+          <p class="product__address">
+            <strong>Endereço:</strong> <%= contact.address %>
+          </p>
+          <% } %>
+        </div>
+        <div class="card__actions">
+          <a href="/edit-contact/<%= contact._id %>?edit=true" class="btn"
+            >Editar</a
+          >
+          <form action="/delete-contact" method="POST">
+            <input type="hidden" value="<%= contact._id %>" name="contactId" />
+            <button class="btn danger" type="submit">Excluir</button>
+          </form>
+        </div>
+      </article>
+      <% } %>
+    </div>
+    <% } else { %>
+    <h1>Nenhum contato encontrado!</h1>
+    <a href="/add-contact" class="btn">Adicionar Contato</a>
+    <% } %>
+  </div>
+</main>
+
+<%- include('../includes/end.ejs') %>

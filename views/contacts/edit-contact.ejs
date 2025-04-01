@@ -1,0 +1,63 @@
+<%- include('../includes/head.ejs') %> <%- include('../includes/navigation.ejs')
+%>
+
+<main>
+  <div class="centered">
+    <h1><%= editing ? 'Editar Contato' : 'Adicionar Contato' %></h1>
+    <% if (errorMessage) { %>
+    <div class="user-message user-message--error"><%= errorMessage %></div>
+    <% } %>
+    <form
+      class="contact-form"
+      action="<%= editing ? '/edit-contact' : '/add-contact' %>"
+      method="POST"
+    >
+      <div class="form-control">
+        <label for="name">Nome</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value="<%= contact.name %>"
+          required
+        />
+      </div>
+      <div class="form-control">
+        <label for="phone">Telefone</label>
+        <input
+          type="text"
+          name="phone"
+          id="phone"
+          value="<%= contact.phone %>"
+          required
+        />
+      </div>
+      <div class="form-control">
+        <label for="email">E-mail</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value="<%= contact.email %>"
+        />
+      </div>
+      <div class="form-control">
+        <label for="address">Endereço</label>
+        <textarea name="address" id="address" rows="3">
+<%= contact.address %></textarea
+        >
+      </div>
+      <% if (editing) { %>
+      <input type="hidden" value="<%= contact._id %>" name="contactId" />
+      <% } %>
+      <div class="form-actions">
+        <button class="btn" type="submit">
+          <%= editing ? 'Atualizar' : 'Adicionar' %>
+        </button>
+        <a href="/contacts" class="btn danger">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+<%- include('../includes/end.ejs') %>

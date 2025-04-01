@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+<div class="centered">
+  <h1>Cadastro</h1>
+  <% if (errorMessage) { %>
+  <div class="user-message user-message--error"><%= errorMessage %></div>
+  <% } %>
+  <form class="login-form" action="/signup" method="POST">
+    <div class="form-control">
+      <label for="email">E-mail</label>
+      <input type="email" name="email" id="email" required />
+    </div>
+    <div class="form-control">
+      <label for="password">Senha (entre 6 e 12 caracteres)</label>
+      <input type="password" name="password" id="password" required />
+    </div>
+    <div class="form-control">
+      <label for="confirmPassword">Confirmar Senha</label>
+      <input
+        type="password"
+        name="confirmPassword"
+        id="confirmPassword"
+        required
+      />
+    </div>
+    <div class="form-actions">
+      <button class="btn" type="submit">Cadastrar</button>
+      <a href="/login">Já tem uma conta? Faça login</a>
+    </div>
+  </form>
+</div>
+<%- include('../includes/end.ejs') %>
